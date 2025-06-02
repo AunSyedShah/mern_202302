@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useFormik } from "formik"
 
 export default function App(){
@@ -8,7 +9,11 @@ export default function App(){
         password: ''
       },
       onSubmit: (values) => {
-        console.log(values);
+        async function send_data(){
+          let response = await axios.post("https://683410af464b49963601255b.mockapi.io/students", values);
+          console.log(response)
+        }
+        send_data()
       }
     }
   );
