@@ -31,6 +31,11 @@ export default function App() {
     }
   })
 
+  async function delete_data(student_id){
+    let response = await axios.delete(`https://683410af464b49963601255b.mockapi.io/student/${student_id}`);
+    console.log(response.data)
+  }
+
   async function get_data() {
     setLoading(true); // ✅ Start spinner
     try {
@@ -97,7 +102,14 @@ export default function App() {
         ) : (
           students && students.length > 0
             ? students.map((student) => (
-              <h1 key={student.id}>{student.name}</h1>
+              <div key={student.id} className="bg-blue-500 m-1">
+                <h1>ID: {student.id}</h1>
+                <h1>Name: {student.name}</h1>
+                <h1>Contact Number: {student.contactNumber}</h1>
+                <button className="bg-red-300" onClick={() => {
+                  delete_data(student.id)
+                }}>Delete</button>
+              </div>
             ))
             : <h1>No Students Found</h1>
         )}
